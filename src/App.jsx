@@ -11,7 +11,6 @@ function App() {
 
   useEffect(() => {
     const inputElement = document.getElementById('searchable-input');
-    inputElement.addEventListener(('focusin'), () => setIsSuggestionsVisible(true));
     document.addEventListener(('click'), (event) => setIsSuggestionsVisible(inputElement.contains(event.target)));
   }, [])
 
@@ -36,6 +35,14 @@ function App() {
     setSuggestions(suggestions => [...suggestions, removedItem].toSorted((a, b) => a.name.localeCompare(b.name)))
   }
 
+  const removeLastSelectedItem = (event) => {
+    if(entry !== '' || selected.length == 0) return;
+    const key = event.key;
+    if (key === "Backspace" || key === "Delete") {
+      removeSelectedItem(selected[selected.length - 1])
+    }
+  }
+
   const renderSelectedItems = () => (
     <div className='selected-items'>
       {selected.map(item =>
@@ -56,14 +63,13 @@ function App() {
     <div className="App">
       <div className="input-chip">
         {renderSelectedItems()}
-        <div id='searchable-input' >
+        <div id='searchable-input' onFocus={() => setIsSuggestionsVisible(true)}>
           <input
             className='input'
             placeholder={selected.length > 0 ? '' : 'Enter email'}
             value={entry}
             onChange={(e) => handleOnChange(e.target.value)}
-            onFocus={() => setIsSuggestionsVisible(true)}
-            onfocusout={() => setIsSuggestionsVisible(false)}
+            onKeyDown={removeLastSelectedItem}
           />
           <SuggestionList
             items={suggestions}
