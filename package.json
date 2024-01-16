@@ -1,5 +1,6 @@
 {
   "name": "sample-app",
+  "homepage": "https://muditgargcoder.github.io/SearchableInput-React",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
