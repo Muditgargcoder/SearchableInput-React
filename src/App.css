@@ -130,3 +130,8 @@
   border-bottom-right-radius: 100px;
   border-top-right-radius: 100px;
 }
+
+.no-record{
+  padding: 10px 20px;
+  color: grey;
+}

@@ -17,7 +17,7 @@ function SuggestionList(props) {
           <div className='email' title={item.email} >{item.email}</div>
         </div>
       )) :
-        <div>No Records Found</div>
+        <div className='no-record' >No Records Found</div>
       }
     </div>
   )
